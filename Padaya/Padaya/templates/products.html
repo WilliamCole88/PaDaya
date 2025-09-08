@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}GOODS{% endblock %}
+
+{% block content %}
+<h2 class="text-4xl font-extrabold text-[#14532d] mb-8 text-center"> PLEASE BUY SOME OF OUR GOODS</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {% for product in products %}
+  <div class="bg-white p-6 rounded-3xl shadow hover:shadow-xl transition">
+    <img src="{{ url_for('static', filename=product[5]) }}" alt="{{ product[1] }}" class="w-full h-48 object-cover rounded-2xl mb-4">
+    <h3 class="text-2xl font-semibold text-[#14532d] mb-2">{{ product[1] }}</h3>
+    <p class="text-black-600 text-sm mb-4">{{ product[2] }}</p>
+    <div class="flex items-center justify-between">
+      <span class="text-xl font-bold text-[#14532d]">L${{ product[3] }} / {{ product[4] }}</span>
+      <form method="POST" action="{{ url_for('main.add_to_cart', product_id=product[0]) }}">
+        <button class="bg-[#14532d] text-white px-4 py-2 rounded-full hover:bg-[#217742]">Buy Now</button>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
